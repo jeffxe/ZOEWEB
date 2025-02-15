@@ -1,0 +1,2601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeo Squad - Carbon Capture Innovation</title>
+    <style>
+        :root {
+            --primary-blue: #1E90FF;    /* Dodger blue */
+            --neon-green: #00FF00;      /* Pure green */
+            --dark-bg: #000000;         /* Pure black background */
+            --glowing-cyan: #00FFFF;    /* Bright cyan */
+            --text-light: #FFFFFF;      /* White text */
+            --accent-color: #1E90FF;    /* Dodger blue */
+            --card-bg: rgba(15, 15, 15, 0.95);  /* Very dark gray, almost black */
+            --secondary-bg: #0A0A0A;    /* Slightly lighter black for contrast */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            width: 100%;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(30, 144, 255, 0.15);
+            border-bottom: 1px solid rgba(30, 144, 255, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            text-shadow: 0 0 10px rgba(30, 144, 255, 0.7);
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.95)),
+                        url('https://source.unsplash.com/random/1920x1080?futuristic+city') center/cover;
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary-blue), var(--glowing-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(30, 144, 255, 0.1);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button .arrow {
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-button:hover .arrow {
+            transform: translateX(5px);
+        }
+
+        .cta-button:hover {
+            background: var(--primary-blue);
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px rgba(30, 144, 255, 0.4);
+        }
+
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: -100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .cta-button:hover::after {
+            left: 100%;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(30, 144, 255, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform-origin: center;
+            perspective: 1000px;
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .team-card:nth-child(1) { animation-delay: 0.1s; }
+        .team-card:nth-child(2) { animation-delay: 0.2s; }
+        .team-card:nth-child(3) { animation-delay: 0.3s; }
+        .team-card:nth-child(4) { animation-delay: 0.4s; }
+        .team-card:nth-child(5) { animation-delay: 0.5s; }
+        .team-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .team-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: 3px solid var(--primary-blue);
+            box-shadow: 0 0 15px rgba(30, 144, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .team-card:hover img {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .team-card h3 {
+            color: var(--primary-blue);
+            margin: 15px 0 10px 0;
+            min-height: 24px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .team-card h3:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--primary-blue);
+            transition: width 0.3s ease;
+        }
+
+        .team-card:hover h3:after {
+            width: 100%;
+        }
+
+        .team-card p {
+            color: var(--text-light);
+            opacity: 0.8;
+            margin: 5px 0;
+            min-height: 20px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Section Headers */
+        .team-section h2 {
+            color: var(--text-light);
+            text-shadow: 0 0 10px rgba(30, 144, 255, 0.3);
+        }
+
+        /* Scrollbar Customization */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-blue);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--glowing-cyan);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .team-card:hover {
+            animation: float 2s ease-in-out infinite;
+        }
+
+        /* Click Animation */
+        .team-card.clicked {
+            animation: popOut 0.5s ease forwards;
+            z-index: 100;
+        }
+
+        @keyframes popOut {
+            0% {
+                transform: scale(1) rotateY(0);
+            }
+            50% {
+                transform: scale(1.2) rotateY(10deg);
+                box-shadow: 0 5px 25px rgba(30, 144, 255, 0.3);
+            }
+            100% {
+                transform: scale(1) rotateY(0);
+            }
+        }
+
+        /* About Section Styles */
+        .about-section {
+            padding: 100px 2rem;
+            background: var(--secondary-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, var(--primary-blue), var(--glowing-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(30, 144, 255, 0.1);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .about-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(30, 144, 255, 0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .about-card:nth-child(1) { animation-delay: 0.1s; }
+        .about-card:nth-child(2) { animation-delay: 0.2s; }
+        .about-card:nth-child(3) { animation-delay: 0.3s; }
+        .about-card:nth-child(4) { animation-delay: 0.4s; }
+        .about-card:nth-child(5) { animation-delay: 0.5s; }
+        .about-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(30, 144, 255, 0.15);
+            border: 1px solid rgba(30, 144, 255, 0.2);
+        }
+
+        .about-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .about-card h3:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--primary-blue);
+            transition: width 0.3s ease;
+        }
+
+        .about-card:hover h3:after {
+            width: 100%;
+        }
+
+        .about-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .about-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+        }
+
+        .about-list li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+            color: var(--text-light);
+            opacity: 0.9;
+        }
+
+        .about-list li:before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary-blue);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-card {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Smooth Scroll Behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .about-card:hover .card-image img {
+            transform: scale(1.1);
+        }
+
+        .card-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                180deg,
+                rgba(0, 0, 0, 0) 0%,
+                rgba(0, 0, 0, 0.2) 100%
+            );
+        }
+
+        .about-card {
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .about-card > *:not(.card-image) {
+            padding: 0 2rem 2rem;
+        }
+
+        .about-card h3 {
+            margin-top: 0;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .card-image {
+                height: 150px;
+            }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            margin: 5% auto;
+            padding: 2rem;
+            width: 90%;
+            max-width: 1200px;
+            border-radius: 15px;
+            position: relative;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 25px;
+            top: 15px;
+            font-size: 2rem;
+            color: var(--primary-blue);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: var(--glowing-cyan);
+            transform: rotate(90deg);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .tech-item {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 0;
+            overflow: hidden;
+            border: 1px solid rgba(30, 144, 255, 0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .tech-item:nth-child(1) { animation-delay: 0.1s; }
+        .tech-item:nth-child(2) { animation-delay: 0.2s; }
+        .tech-item:nth-child(3) { animation-delay: 0.3s; }
+        .tech-item:nth-child(4) { animation-delay: 0.4s; }
+
+        .tech-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .tech-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .tech-item h3 {
+            color: var(--primary-blue);
+            margin: 1rem;
+        }
+
+        .tech-item p, .tech-item ul {
+            padding: 0 1rem 1rem;
+            color: var(--text-light);
+            opacity: 0.9;
+        }
+
+        .tech-item ul {
+            list-style: none;
+        }
+
+        .tech-item ul li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .tech-item ul li:before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary-blue);
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+            }
+            
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .carbon-effects {
+            padding: 4rem 2rem;
+            background: var(--dark-bg);
+        }
+
+        .carbon-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .carbon-content h2 {
+            text-align: center;
+            color: var(--primary-blue);
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+        }
+
+        /* Statistics Styles */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-circle {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 1rem;
+        }
+
+        .circular-chart {
+            width: 150px;
+            height: 150px;
+        }
+
+        .circle-bg {
+            fill: none;
+            stroke: rgba(30, 144, 255, 0.1);
+            stroke-width: 3;
+        }
+
+        .circle {
+            fill: none;
+            stroke: var(--primary-blue);
+            stroke-width: 3;
+            stroke-linecap: round;
+            transition: stroke-dasharray 1s ease;
+        }
+
+        .stat-number {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            color: var(--primary-blue);
+        }
+
+        /* Graph Styles */
+        .graph-container {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 4rem;
+        }
+
+        .graph {
+            height: 300px;
+            padding: 2rem 3rem 3rem;
+            position: relative;
+            margin-top: 2rem;
+        }
+
+        .y-axis-label {
+            position: absolute;
+            left: -10px;
+            top: 50%;
+            transform: rotate(-90deg) translateX(50%);
+            color: var(--text-light);
+            opacity: 0.8;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .projection-note {
+            text-align: center;
+            color: var(--text-light);
+            opacity: 0.8;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            width: 100%;
+            position: absolute;
+            bottom: -30px;
+            left: 0;
+        }
+
+        .bar-container {
+            height: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            margin-left: 2rem;
+        }
+
+        .bar {
+            width: 50px;
+            background: var(--primary-blue);
+            margin: 0 10px;
+            position: relative;
+            transition: height 1s ease;
+            height: 0;
+        }
+
+        .bar span {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-light);
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            .graph {
+                padding: 2rem 1.5rem;
+            }
+
+            .y-axis-label {
+                left: -20px;
+                font-size: 0.8rem;
+            }
+
+            .bar {
+                width: 30px;
+                margin: 0 5px;
+            }
+
+            .projection-note {
+                font-size: 0.8rem;
+                bottom: -35px;
+            }
+        }
+
+        /* Impact Cards */
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .impact-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .impact-card i {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        /* Animations */
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .stats-container, .impact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .process-animation {
+            padding: 4rem 2rem;
+            background: var(--dark-bg);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .process-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .process-content h2 {
+            text-align: center;
+            color: var(--primary-blue);
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+        }
+
+        .animation-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 15px;
+            position: relative;
+            min-height: 400px;
+        }
+
+        /* Plant Section */
+        .plant {
+            position: relative;
+            width: 200px;
+            height: 250px;
+        }
+
+        .chimney {
+            width: 40px;
+            height: 100px;
+            background: #555;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .smoke-container {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .smoke {
+            width: 20px;
+            height: 20px;
+            background: #666;
+            border-radius: 50%;
+            position: absolute;
+            opacity: 0;
+            animation: smokeRise 2s infinite;
+        }
+
+        .smoke:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .smoke:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        .building {
+            width: 150px;
+            height: 150px;
+            background: #444;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Capture Section */
+        .pipe {
+            width: 200px;
+            height: 20px;
+            background: #666;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carbon-particle {
+            width: 10px;
+            height: 10px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            animation: particleFlow 3s infinite linear;
+        }
+
+        .zeolite-chamber {
+            width: 150px;
+            height: 200px;
+            background: rgba(30, 144, 255, 0.1);
+            border: 2px solid var(--primary-blue);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .zeolite-crystals {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .crystal {
+            width: 30px;
+            height: 30px;
+            background: var(--primary-blue);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            animation: crystalPulse 2s infinite;
+        }
+
+        /* Processing Section */
+        .processor {
+            position: relative;
+            width: 150px;
+            height: 150px;
+        }
+
+        .gear {
+            width: 60px;
+            height: 60px;
+            background: #666;
+            border-radius: 50%;
+            position: absolute;
+            animation: rotate 4s infinite linear;
+        }
+
+        .gear:before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--card-bg);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .purification-chamber {
+            width: 100px;
+            height: 150px;
+            background: rgba(30, 144, 255, 0.2);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pure-carbon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: purePulse 2s infinite;
+        }
+
+        .label {
+            text-align: center;
+            color: var(--text-light);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes smokeRise {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-50px) scale(2);
+                opacity: 0;
+            }
+        }
+
+        @keyframes particleFlow {
+            0% { left: -10px; }
+            100% { left: 100%; }
+        }
+
+        @keyframes crystalPulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes purePulse {
+            0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+            50% { transform: translateX(-50%) scale(1.1); opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .animation-container {
+                flex-direction: column;
+                gap: 2rem;
+                padding: 1rem;
+            }
+
+            .plant, .processor {
+                transform: scale(0.8);
+            }
+
+            .pipe {
+                width: 100px;
+            }
+        }
+
+        /* Enhanced Zeolite Chamber Styles */
+        .zeolite-chamber {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .capture-particles .particle {
+            width: 8px;
+            height: 8px;
+            background: #666;
+            border-radius: 50%;
+            position: absolute;
+            opacity: 0;
+            animation: captureProcess 3s infinite;
+        }
+
+        .capture-particles .particle:nth-child(1) { animation-delay: 0s; }
+        .capture-particles .particle:nth-child(2) { animation-delay: 0.8s; }
+        .capture-particles .particle:nth-child(3) { animation-delay: 1.6s; }
+        .capture-particles .particle:nth-child(4) { animation-delay: 2.4s; }
+
+        .absorption-waves {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                180deg,
+                transparent 0%,
+                rgba(30, 144, 255, 0.1) 50%,
+                rgba(30, 144, 255, 0.2) 100%
+            );
+            animation: waveMove 2s infinite;
+        }
+
+        /* Enhanced Processing Chamber Styles */
+        .processing-particles .process-particle {
+            width: 10px;
+            height: 10px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            position: absolute;
+            opacity: 0;
+            animation: processFlow 2s infinite;
+        }
+
+        .processing-particles .process-particle:nth-child(1) { animation-delay: 0s; }
+        .processing-particles .process-particle:nth-child(2) { animation-delay: 0.7s; }
+        .processing-particles .process-particle:nth-child(3) { animation-delay: 1.4s; }
+
+        .bubbles .bubble {
+            width: 15px;
+            height: 15px;
+            border: 2px solid var(--primary-blue);
+            border-radius: 50%;
+            position: absolute;
+            opacity: 0;
+            animation: bubbleRise 3s infinite;
+        }
+
+        .bubbles .bubble:nth-child(1) { left: 20%; animation-delay: 0s; }
+        .bubbles .bubble:nth-child(2) { left: 50%; animation-delay: 1s; }
+        .bubbles .bubble:nth-child(3) { left: 80%; animation-delay: 2s; }
+
+        .purification-waves {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(
+                0deg,
+                rgba(30, 144, 255, 0.3) 0%,
+                rgba(30, 144, 255, 0.1) 50%,
+                transparent 100%
+            );
+            animation: purificationWave 2s infinite;
+        }
+
+        /* New Animations */
+        @keyframes captureProcess {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: translate(20px, 20px) scale(0.8);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(40px, 40px) scale(0.5);
+            }
+        }
+
+        @keyframes waveMove {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes processFlow {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(50px, 20px) scale(0.5);
+            }
+        }
+
+        @keyframes bubbleRise {
+            0% {
+                bottom: 0;
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                bottom: 100%;
+                opacity: 0;
+                transform: scale(1.5);
+            }
+        }
+
+        @keyframes purificationWave {
+            0%, 100% {
+                transform: translateY(0) scaleY(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(-5px) scaleY(1.1);
+                opacity: 1;
+            }
+        }
+
+        /* Update existing gear animation */
+        .gear-small {
+            width: 40px;
+            height: 40px;
+            top: 60px;
+            left: 60px;
+            animation: rotate 4s infinite linear reverse;
+        }
+
+        .carbon-products {
+            padding: 4rem 2rem;
+            background: var(--dark-bg);
+        }
+
+        .products-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .products-content h2 {
+            text-align: center;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .section-intro {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                180deg,
+                transparent 0%,
+                rgba(0, 0, 0, 0.7) 100%
+            );
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .product-info p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .product-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .product-features li {
+            color: var(--text-light);
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            opacity: 0.8;
+        }
+
+        .product-features li:before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary-blue);
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-card {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+
+        /* Product Modal Styles */
+        .product-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            margin: 5% auto;
+            padding: 2rem;
+            width: 80%;
+            max-width: 1200px;
+            border-radius: 15px;
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        .modal-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item p {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 0.5rem;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .modal-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .modal-details h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .modal-details ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modal-details ul li {
+            color: var(--text-light);
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .modal-details ul li:before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary-blue);
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+            }
+
+            .modal-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-details {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .environmental-impact {
+            padding: 4rem 2rem;
+            background: var(--dark-bg);
+        }
+
+        .impact-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .impact-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-box {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-circle {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .stat-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        .stat-unit {
+            position: absolute;
+            top: 65%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            color: var(--text-light);
+            opacity: 0.8;
+        }
+
+        .circular-chart {
+            width: 150px;
+            height: 150px;
+            transform: rotate(-90deg);
+        }
+
+        .circle-bg {
+            fill: none;
+            stroke: rgba(30, 144, 255, 0.1);
+            stroke-width: 3;
+        }
+
+        .circle {
+            fill: none;
+            stroke: var(--primary-blue);
+            stroke-width: 3;
+            stroke-linecap: round;
+            transition: stroke-dasharray 1s ease;
+        }
+
+        .emissions-graph {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 3rem 0;
+        }
+
+        .graph-container {
+            height: 400px;
+            margin: 2rem 0;
+        }
+
+        .graph-legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 10px;
+            border-radius: 2px;
+        }
+
+        .legend-color.baseline {
+            background: rgba(255, 99, 132, 0.8);
+        }
+
+        .legend-color.reduction {
+            background: rgba(75, 192, 192, 0.8);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin: 1rem 0;
+        }
+
+        .trend {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .trend.positive {
+            background: rgba(75, 192, 192, 0.1);
+            color: #4bc0c0;
+        }
+
+        .trend.negative {
+            background: rgba(255, 99, 132, 0.1);
+            color: #ff6384;
+        }
+
+        @media (max-width: 768px) {
+            .impact-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .graph-container {
+                height: 300px;
+            }
+
+            .graph-legend {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Consolidate all script handlers
+        document.addEventListener('DOMContentLoaded', function() {
+            // Product Modal Handlers
+            function openProductModal(productId) {
+                document.getElementById(productId + 'Modal').style.display = 'block';
+            }
+
+            // Make openProductModal available globally
+            window.openProductModal = openProductModal;
+
+            // Close handlers for all modals
+            document.querySelectorAll('.close-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.closest('.modal, .product-modal').style.display = 'none';
+                });
+            });
+
+            // Click outside to close for all modals
+            window.addEventListener('click', function(event) {
+                if (event.target.classList.contains('modal') || 
+                    event.target.classList.contains('product-modal')) {
+                    event.target.style.display = 'none';
+                }
+            });
+
+            // Team card click animations
+            document.querySelectorAll('.team-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    document.querySelectorAll('.team-card').forEach(c => {
+                        c.classList.remove('clicked');
+                    });
+                    card.classList.add('clicked');
+                    setTimeout(() => {
+                        card.classList.remove('clicked');
+                    }, 500);
+                });
+            });
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Initialize Chart
+            const ctx = document.getElementById('reductionChart').getContext('2d');
+            if (ctx) {
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['2023', '2024', '2025', '2026', '2027'],
+                        datasets: [{
+                            label: 'Carbon Emissions (Million Tons)',
+                            data: [100, 85, 65, 45, 25],
+                            borderColor: '#1E90FF',
+                            backgroundColor: 'rgba(30, 144, 255, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#fff'
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: '#fff'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: '#fff'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Animate statistics
+                        entry.target.querySelectorAll('.stat-number').forEach(stat => {
+                            const target = parseInt(stat.getAttribute('data-target'));
+                            let current = 0;
+                            const increment = target / 50;
+                            const timer = setInterval(() => {
+                                current += increment;
+                                stat.textContent = Math.round(current);
+                                if (current >= target) {
+                                    stat.textContent = target;
+                                    clearInterval(timer);
+                                }
+                            }, 40);
+                        });
+
+                        // Animate circular stats
+                        entry.target.querySelectorAll('.stat-circle').forEach(stat => {
+                            const value = stat.getAttribute('data-value');
+                            stat.querySelector('.circle').style.strokeDasharray = `${value}, 100`;
+                        });
+
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements
+            document.querySelectorAll('.impact-stats').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="nav-container">
+        <nav>
+            <div class="logo">ZEO SQUAD</div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#team">Team</a>
+                <a href="#technology">Technology</a>
+                <a href="#impact">Impact</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </div>
+
+    <section class="hero" id="home">
+        <div class="hero-content fade-in">
+            <h1>Revolutionizing Carbon Capture for a Greener Future</h1>
+            <p>Turning CO₂ into valuable resources with cutting-edge technology</p>
+            <a href="#about" class="cta-button">Learn More <span class="arrow">→</span></a>
+        </div>
+    </section>
+
+    <!-- After the hero section and before the about section -->
+    <section class="process-animation" id="process">
+        <div class="process-content">
+            <h2>Carbon Capture Process</h2>
+            
+            <div class="animation-container">
+                <!-- Thermal Plant -->
+                <div class="plant-section">
+                    <div class="plant">
+                        <div class="chimney">
+                            <div class="smoke-container">
+                                <div class="smoke"></div>
+                                <div class="smoke"></div>
+                                <div class="smoke"></div>
+                            </div>
+                        </div>
+                        <div class="building"></div>
+                    </div>
+                    <div class="label">Thermal Power Plant</div>
+                </div>
+
+                <!-- Capture Process -->
+                <div class="capture-section">
+                    <div class="pipe">
+                        <div class="carbon-particle"></div>
+                        <div class="carbon-particle"></div>
+                        <div class="carbon-particle"></div>
+                    </div>
+                    <div class="zeolite-chamber">
+                        <div class="zeolite-crystals">
+                            <div class="crystal"></div>
+                            <div class="crystal"></div>
+                            <div class="crystal"></div>
+                        </div>
+                        <div class="capture-particles">
+                            <div class="particle"></div>
+                            <div class="particle"></div>
+                            <div class="particle"></div>
+                            <div class="particle"></div>
+                        </div>
+                        <div class="absorption-waves"></div>
+                    </div>
+                    <div class="label">Zeolite Capture Chamber</div>
+                </div>
+
+                <!-- Processing -->
+                <div class="processing-section">
+                    <div class="processor">
+                        <div class="gear"></div>
+                        <div class="gear gear-small"></div>
+                        <div class="processing-particles">
+                            <div class="process-particle"></div>
+                            <div class="process-particle"></div>
+                            <div class="process-particle"></div>
+                        </div>
+                    </div>
+                    <div class="purification-chamber">
+                        <div class="bubbles">
+                            <div class="bubble"></div>
+                            <div class="bubble"></div>
+                            <div class="bubble"></div>
+                        </div>
+                        <div class="pure-carbon"></div>
+                        <div class="purification-waves"></div>
+                    </div>
+                    <div class="label">Processing & Purification</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+        <div class="about-content">
+            <h2>About Our Project</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Our Mission">
+                    </div>
+                    <h3>Our Mission</h3>
+                    <p>Developing innovative zeolite-based solutions for efficient carbon capture and utilization. Our mission is to revolutionize how industries handle CO₂ emissions, making carbon capture more accessible and economically viable.</p>
+                    <ul class="about-list">
+                        <li>Sustainable CO₂ Capture</li>
+                        <li>Eco-friendly Processing</li>
+                        <li>Industrial Integration</li>
+                    </ul>
+                </div>
+                <div class="about-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Technology">
+                    </div>
+                    <h3>Technology</h3>
+                    <p>Our technology leverages advanced zeolite frameworks enhanced with cutting-edge materials science. We've developed a unique approach that combines:</p>
+                    <ul class="about-list">
+                        <li>Custom Zeolite Structures</li>
+                        <li>Smart Absorption Systems</li>
+                        <li>AI-Powered Optimization</li>
+                        <li>Real-time Monitoring</li>
+                    </ul>
+                </div>
+                <div class="about-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1518544801976-3e159e50e5bb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Impact">
+                    </div>
+                    <h3>Impact</h3>
+                    <p>Our solution creates a sustainable circular economy by transforming captured CO₂ into valuable products. The impact extends across multiple areas:</p>
+                    <ul class="about-list">
+                        <li>40% Higher Capture Efficiency</li>
+                        <li>Reduced Implementation Costs</li>
+                        <li>Zero Waste Processing</li>
+                    </ul>
+                </div>
+                <div class="about-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Innovation">
+                    </div>
+                    <h3>Innovation</h3>
+                    <p>Our innovative approach combines multiple technologies:</p>
+                    <ul class="about-list">
+                        <li>Smart Material Design</li>
+                        <li>IoT Integration</li>
+                        <li>Predictive Maintenance</li>
+                        <li>Energy-Efficient Operation</li>
+                    </ul>
+                </div>
+                <div class="about-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Applications">
+                    </div>
+                    <h3>Applications</h3>
+                    <p>Our solution is designed for various industrial applications:</p>
+                    <ul class="about-list">
+                        <li>Power Plants</li>
+                        <li>Manufacturing Facilities</li>
+                        <li>Chemical Processing</li>
+                        <li>Transportation Sector</li>
+                    </ul>
+                </div>
+                <div class="about-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Future Goals">
+                    </div>
+                    <h3>Future Goals</h3>
+                    <p>We're committed to continuous improvement and expansion:</p>
+                    <ul class="about-list">
+                        <li>Global Implementation</li>
+                        <li>Enhanced Efficiency</li>
+                        <li>Cost Reduction</li>
+                        <li>Technology Integration</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add these modals after your about section -->
+    <div id="missionModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Our Mission & Vision</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <img src="https://images.unsplash.com/photo-1536697246787-1f7ae568d89a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Sustainable Capture">
+                    <h3>Sustainable Capture</h3>
+                    <p>Our advanced carbon capture technology:</p>
+                    <ul>
+                        <li>Zero-emission operation</li>
+                        <li>Energy-efficient process</li>
+                        <li>Minimal environmental impact</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <img src="https://images.unsplash.com/photo-1507668339897-8a035aa9527d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Economic Viability">
+                    <h3>Economic Viability</h3>
+                    <p>Making carbon capture accessible:</p>
+                    <ul>
+                        <li>Cost-effective implementation</li>
+                        <li>Rapid ROI for industries</li>
+                        <li>Scalable solutions</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Global Impact">
+                    <h3>Global Impact</h3>
+                    <p>Contributing to climate action:</p>
+                    <ul>
+                        <li>Reduced carbon footprint</li>
+                        <li>Industry transformation</li>
+                        <li>Sustainable development</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Innovation Focus">
+                    <h3>Innovation Focus</h3>
+                    <p>Continuous improvement through:</p>
+                    <ul>
+                        <li>Research & Development</li>
+                        <li>Technology Integration</li>
+                        <li>Process Optimization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="techModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Our Technology Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <img src="https://images.unsplash.com/photo-1527334919515-b8dee906a34b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Zeolite Framework">
+                    <h3>Zeolite Framework</h3>
+                    <p>Advanced microporous materials with customized pore sizes and surface chemistry for optimal CO₂ capture. Our zeolites feature:</p>
+                    <ul>
+                        <li>High surface area (>1000 m²/g)</li>
+                        <li>Selective CO₂ adsorption</li>
+                        <li>Thermal stability up to 800°C</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Smart Sensors">
+                    <h3>IoT Integration</h3>
+                    <p>Real-time monitoring and control system featuring:</p>
+                    <ul>
+                        <li>Temperature and pressure sensors</li>
+                        <li>Gas composition analyzers</li>
+                        <li>Automated flow control</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="AI System">
+                    <h3>AI & Machine Learning</h3>
+                    <p>Intelligent optimization system including:</p>
+                    <ul>
+                        <li>Predictive maintenance</li>
+                        <li>Performance optimization</li>
+                        <li>Real-time efficiency analysis</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Carbon Processing">
+                    <h3>Carbon Processing</h3>
+                    <p>Advanced processing techniques for captured CO₂:</p>
+                    <ul>
+                        <li>Chemical conversion systems</li>
+                        <li>Value-added product synthesis</li>
+                        <li>Circular economy integration</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="impactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Impact</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <img src="https://images.unsplash.com/photo-1527334919515-b8dee906a34b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Sustainable Capture">
+                    <h3>Sustainable Capture</h3>
+                    <p>Our advanced carbon capture technology:</p>
+                    <ul>
+                        <li>Zero-emission operation</li>
+                        <li>Energy-efficient process</li>
+                        <li>Minimal environmental impact</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <img src="https://images.unsplash.com/photo-1507668339897-8a035aa9527d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Economic Viability">
+                    <h3>Economic Viability</h3>
+                    <p>Making carbon capture accessible:</p>
+                    <ul>
+                        <li>Cost-effective implementation</li>
+                        <li>Rapid ROI for industries</li>
+                        <li>Scalable solutions</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Global Impact">
+                    <h3>Global Impact</h3>
+                    <p>Contributing to climate action:</p>
+                    <ul>
+                        <li>Reduced carbon footprint</li>
+                        <li>Industry transformation</li>
+                        <li>Sustainable development</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Innovation Focus">
+                    <h3>Innovation Focus</h3>
+                    <p>Continuous improvement through:</p>
+                    <ul>
+                        <li>Research & Development</li>
+                        <li>Technology Integration</li>
+                        <li>Process Optimization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="innovationModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Innovation</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <img src="https://images.unsplash.com/photo-1527334919515-b8dee906a34b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Sustainable Capture">
+                    <h3>Sustainable Capture</h3>
+                    <p>Our advanced carbon capture technology:</p>
+                    <ul>
+                        <li>Zero-emission operation</li>
+                        <li>Energy-efficient process</li>
+                        <li>Minimal environmental impact</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <img src="https://images.unsplash.com/photo-1507668339897-8a035aa9527d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Economic Viability">
+                    <h3>Economic Viability</h3>
+                    <p>Making carbon capture accessible:</p>
+                    <ul>
+                        <li>Cost-effective implementation</li>
+                        <li>Rapid ROI for industries</li>
+                        <li>Scalable solutions</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Global Impact">
+                    <h3>Global Impact</h3>
+                    <p>Contributing to climate action:</p>
+                    <ul>
+                        <li>Reduced carbon footprint</li>
+                        <li>Industry transformation</li>
+                        <li>Sustainable development</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Innovation Focus">
+                    <h3>Innovation Focus</h3>
+                    <p>Continuous improvement through:</p>
+                    <ul>
+                        <li>Research & Development</li>
+                        <li>Technology Integration</li>
+                        <li>Process Optimization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="applicationsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Applications</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <img src="https://images.unsplash.com/photo-1527334919515-b8dee906a34b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Sustainable Capture">
+                    <h3>Sustainable Capture</h3>
+                    <p>Our advanced carbon capture technology:</p>
+                    <ul>
+                        <li>Zero-emission operation</li>
+                        <li>Energy-efficient process</li>
+                        <li>Minimal environmental impact</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <img src="https://images.unsplash.com/photo-1507668339897-8a035aa9527d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Economic Viability">
+                    <h3>Economic Viability</h3>
+                    <p>Making carbon capture accessible:</p>
+                    <ul>
+                        <li>Cost-effective implementation</li>
+                        <li>Rapid ROI for industries</li>
+                        <li>Scalable solutions</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Global Impact">
+                    <h3>Global Impact</h3>
+                    <p>Contributing to climate action:</p>
+                    <ul>
+                        <li>Reduced carbon footprint</li>
+                        <li>Industry transformation</li>
+                        <li>Sustainable development</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Innovation Focus">
+                    <h3>Innovation Focus</h3>
+                    <p>Continuous improvement through:</p>
+                    <ul>
+                        <li>Research & Development</li>
+                        <li>Technology Integration</li>
+                        <li>Process Optimization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="futureModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Future Goals</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <img src="https://images.unsplash.com/photo-1527334919515-b8dee906a34b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Sustainable Capture">
+                    <h3>Sustainable Capture</h3>
+                    <p>Our advanced carbon capture technology:</p>
+                    <ul>
+                        <li>Zero-emission operation</li>
+                        <li>Energy-efficient process</li>
+                        <li>Minimal environmental impact</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <img src="https://images.unsplash.com/photo-1507668339897-8a035aa9527d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Economic Viability">
+                    <h3>Economic Viability</h3>
+                    <p>Making carbon capture accessible:</p>
+                    <ul>
+                        <li>Cost-effective implementation</li>
+                        <li>Rapid ROI for industries</li>
+                        <li>Scalable solutions</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Global Impact">
+                    <h3>Global Impact</h3>
+                    <p>Contributing to climate action:</p>
+                    <ul>
+                        <li>Reduced carbon footprint</li>
+                        <li>Industry transformation</li>
+                        <li>Sustainable development</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Innovation Focus">
+                    <h3>Innovation Focus</h3>
+                    <p>Continuous improvement through:</p>
+                    <ul>
+                        <li>Research & Development</li>
+                        <li>Technology Integration</li>
+                        <li>Process Optimization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="environmental-impact" id="impact">
+        <div class="impact-content">
+            <h2>Carbon Emissions & Environmental Impact</h2>
+            <p class="section-intro">Real-time monitoring and measurable impact of our carbon capture technology</p>
+
+            <!-- Impact Statistics -->
+            <div class="impact-stats">
+                <div class="stat-box">
+                    <div class="stat-circle" data-value="1000">
+                        <div class="stat-value">1000</div>
+                        <div class="stat-unit">tons/day</div>
+                        <svg viewBox="0 0 36 36" class="circular-chart">
+                            <path class="circle-bg" d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                            <path class="circle" stroke-dasharray="75, 100" d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                        </svg>
+                    </div>
+                    <h3>CO₂ Captured</h3>
+                    <p>Direct capture from industrial sources</p>
+                </div>
+
+                <div class="stat-box">
+                    <div class="stat-circle" data-value="85">
+                        <div class="stat-value">85</div>
+                        <div class="stat-unit">%</div>
+                        <svg viewBox="0 0 36 36" class="circular-chart">
+                            <path class="circle-bg" d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                            <path class="circle" stroke-dasharray="85, 100" d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                        </svg>
+                    </div>
+                    <h3>Capture Efficiency</h3>
+                    <p>Industry-leading capture rate</p>
+                </div>
+
+                <div class="stat-box">
+                    <div class="stat-circle" data-value="60">
+                        <div class="stat-value">60</div>
+                        <div class="stat-unit">%</div>
+                        <svg viewBox="0 0 36 36" class="circular-chart">
+                            <path class="circle-bg" d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                            <path class="circle" stroke-dasharray="60, 100" d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                        </svg>
+                    </div>
+                    <h3>Emissions Reduction</h3>
+                    <p>Total reduction achieved</p>
+                </div>
+            </div>
+
+            <!-- Emissions Graph -->
+            <div class="emissions-graph">
+                <h3>Carbon Emissions Reduction Timeline</h3>
+                <div class="graph-container">
+                    <canvas id="emissionsChart"></canvas>
+                </div>
+                <div class="graph-legend">
+                    <div class="legend-item">
+                        <span class="legend-color baseline"></span>
+                        <span>Baseline Emissions</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color reduction"></span>
+                        <span>With Zeolite Technology</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real-time Monitoring -->
+            <div class="monitoring-section">
+                <h3>Live Performance Metrics</h3>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <h4>Capture Rate</h4>
+                        <div class="metric-value">42.5</div>
+                        <div class="metric-unit">tons/hour</div>
+                        <div class="trend positive">↑ 2.3%</div>
+                    </div>
+                    <div class="metric-card">
+                        <h4>System Efficiency</h4>
+                        <div class="metric-value">94.8</div>
+                        <div class="metric-unit">%</div>
+                        <div class="trend positive">↑ 1.5%</div>
+                    </div>
+                    <div class="metric-card">
+                        <h4>Energy Usage</h4>
+                        <div class="metric-value">28.3</div>
+                        <div class="metric-unit">kWh/ton</div>
+                        <div class="trend negative">↓ 3.1%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section" id="team">
+        <h2 style="text-align: center; margin-bottom: 2rem;">Meet Zeo Squad – The Minds Behind Innovation</h2>
+        <div class="team-grid">
+            <div class="team-card">
+                <img src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortFlat&accessoriesType=Blank&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=Blue03&eyeType=Default&eyebrowType=Default&mouthType=Smile&skinColor=Light" alt="Yasar">
+                <h3>Yasar</h3>
+                <p>Team Leader & System Architect</p>
+                <p>Strategizing the future of carbon capture</p>
+            </div>
+            <div class="team-card">
+                <img src="https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Blank&hairColor=Black&facialHairType=Blank&clotheType=BlazerShirt&clotheColor=PastelBlue&eyeType=Default&eyebrowType=Default&mouthType=Smile&skinColor=Light" alt="Dhuyukshaa">
+                <h3>Dhuyukshaa</h3>
+                <p>Research & Technology Implementation</p>
+                <p>Mastering the science of zeolites</p>
+            </div>
+            <div class="team-card">
+                <img src="https://avataaars.io/?avatarStyle=Circle&topType=LongHairBob&accessoriesType=Blank&hairColor=Black&facialHairType=Blank&clotheType=BlazerShirt&clotheColor=PastelRed&eyeType=Default&eyebrowType=Default&mouthType=Smile&skinColor=Light" alt="Kishomitha">
+                <h3>Kishomitha</h3>
+                <p>Environmental Analysis & Strategy</p>
+                <p>Bridging technology with sustainability</p>
+            </div>
+            <div class="team-card">
+                <img src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortWaved&accessoriesType=Blank&hairColor=Black&facialHairType=BeardLight&clotheType=GraphicShirt&clotheColor=Gray02&eyeType=Default&eyebrowType=Default&mouthType=Smile&skinColor=Light" alt="Akash">
+                <h3>Akash</h3>
+                <p>Software & Automation Engineer</p>
+                <p>Optimizing efficiency through smart tech</p>
+            </div>
+            <div class="team-card">
+                <img src="https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight2&accessoriesType=Round&hairColor=Black&facialHairType=Blank&clotheType=BlazerShirt&clotheColor=PastelBlue&eyeType=Default&eyebrowType=Default&mouthType=Smile&skinColor=Light" alt="Ashtamitra">
+                <h3>Ashtamitra</h3>
+                <p>Material Science Specialist</p>
+                <p>Transforming captured carbon into valuable products</p>
+            </div>
+            <div class="team-card">
+                <img src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairDreads01&accessoriesType=Prescription02&hairColor=Black&facialHairType=BeardMedium&clotheType=ShirtCrewNeck&clotheColor=Blue03&eyeType=Default&eyebrowType=Default&mouthType=Smile&skinColor=Light" alt="Jeffrey Nathaniel">
+                <h3>Jeffrey Nathaniel</h3>
+                <p>Tech & Prototyping Expert</p>
+                <p>Engineering the future of carbon solutions</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="carbon-products" id="products">
+        <div class="products-content">
+            <h2>Products from Captured Carbon</h2>
+            <p class="section-intro">Transforming captured CO₂ into valuable products through innovative processes</p>
+            
+            <div class="products-grid">
+                <!-- Update the product cards with new images and add modals -->
+                <div class="product-card" onclick="openProductModal('buildingMaterials')">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1590502160462-58b41354f588?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Carbon Concrete">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Building Materials</h3>
+                        <p>Carbon-negative concrete and construction materials that reduce industry emissions while improving durability.</p>
+                        <ul class="product-features">
+                            <li>Enhanced strength</li>
+                            <li>Lower carbon footprint</li>
+                            <li>Improved durability</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1534797258760-1bd2cc95a5bd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Synthetic Fuels">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Synthetic Fuels</h3>
+                        <p>Clean-burning synthetic fuels created from captured carbon, providing sustainable energy solutions.</p>
+                        <ul class="product-features">
+                            <li>Carbon neutral</li>
+                            <li>High efficiency</li>
+                            <li>Drop-in replacement</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1589782182703-2aaa69037b5b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Plastics & Polymers">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Plastics & Polymers</h3>
+                        <p>Sustainable plastics and polymers manufactured using captured CO₂, reducing petroleum dependency.</p>
+                        <ul class="product-features">
+                            <li>Biodegradable</li>
+                            <li>Recyclable</li>
+                            <li>Durable</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Agricultural Products">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Agricultural Products</h3>
+                        <p>Enhanced fertilizers and soil amendments that improve crop yields while sequestering carbon.</p>
+                        <ul class="product-features">
+                            <li>Increased yield</li>
+                            <li>Soil enrichment</li>
+                            <li>Water retention</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1563069544-628cbd4629aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Consumer Goods">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Consumer Goods</h3>
+                        <p>Everyday products made from captured carbon, from packaging to household items.</p>
+                        <ul class="product-features">
+                            <li>Eco-friendly</li>
+                            <li>Cost-effective</li>
+                            <li>Sustainable</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1616469829581-73993eb86b02?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Chemical Products">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Chemical Products</h3>
+                        <p>Industrial chemicals and compounds synthesized from captured CO₂ for various applications.</p>
+                        <ul class="product-features">
+                            <li>High purity</li>
+                            <li>Versatile use</li>
+                            <li>Reduced emissions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Product Modals -->
+    <div id="buildingMaterialsModal" class="product-modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Building Materials from Captured Carbon</h2>
+            
+            <div class="modal-gallery">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1583115260445-f95fe37202ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Carbon Concrete Production">
+                    <p>Carbon-infused concrete production process</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1621847468516-1ed5d0df55fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Sustainable Construction">
+                    <p>Sustainable construction applications</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1597484661643-2f5fef640dd1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Material Testing">
+                    <p>Strength and durability testing</p>
+                </div>
+            </div>
+
+            <div class="modal-details">
+                <h3>Technical Specifications</h3>
+                <ul>
+                    <li>Compressive Strength: >40 MPa</li>
+                    <li>CO₂ Absorption: 5-10% by weight</li>
+                    <li>Curing Time: 24-48 hours</li>
+                    <li>Carbon Negative: Up to 100kg CO₂/m³</li>
+                </ul>
+
+                <h3>Applications</h3>
+                <ul>
+                    <li>Commercial Construction</li>
+                    <li>Infrastructure Projects</li>
+                    <li>Residential Buildings</li>
+                    <li>Precast Elements</li>
+                </ul>
+
+                <h3>Environmental Impact</h3>
+                <ul>
+                    <li>Reduces construction CO₂ emissions by 50%</li>
+                    <li>Lower water consumption</li>
+                    <li>Improved material lifecycle</li>
+                    <li>Recyclable end product</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize emissions chart
+            const ctx = document.getElementById('emissionsChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['2023', '2024', '2025', '2026', '2027'],
+                    datasets: [{
+                        label: 'Baseline Emissions',
+                        data: [100, 98, 97, 96, 95],
+                        borderColor: 'rgba(255, 99, 132, 0.8)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                        fill: true
+                    }, {
+                        label: 'With Zeolite Technology',
+                        data: [100, 80, 60, 45, 35],
+                        borderColor: 'rgba(75, 192, 192, 0.8)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.1)',
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#fff'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#fff'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Animate stats when in view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.querySelectorAll('.stat-circle').forEach(stat => {
+                            const value = stat.getAttribute('data-value');
+                            stat.querySelector('.circle').style.strokeDasharray = `${value}, 100`;
+                        });
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            observer.observe(document.querySelector('.impact-stats'));
+        });
+    </script>
+</body>
+</html>
